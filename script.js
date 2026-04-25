@@ -29,11 +29,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ========== 配置区（根据实际情况修改）==========
 const GITHUB_REPO = 'jackie-jiang-ios/alight';        // GitHub 仓库
 const OSS_BASE_URL = 'https://alight-downloads.oss-cn-hangzhou.aliyuncs.com/releases/';  // 阿里云 OSS 基础地址
+const GITHUB_RELEASE_BASE = 'https://github.com/jackie-jiang-ios/alight/releases/download/';  // GitHub Releases 下载地址
 
 // 全局状态：最新版本信息
 let latestRelease = null;
 
-// Download handler - 跳转到阿里云 OSS 下载
+/**
+ * 智能下载分流：
+ * - 国内用户 → 阿里云 OSS（速度快）
+ * - 国外用户 → GitHub Releases（全球 CDN）
+ * 
+ * 判断逻辑：尝试加载一个国内 CDN 的资源，
+ * 如果超时或失败则判定为国外用户
+ */
+function isChinaUser() {
+  try {
+    // 通过 navigator.language 或 timezone 粗略判断
+    const lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    
+    // 中文 + 中国时区 → 国内用户
+    if (lang.startsWith('zh') && (tz.includes('Asia/Shanghai') || tz.includes('Asia/Hong_Kong') || tz.includes('Asia/Taipei'))) {
+      return true;
+    }
+    
+    // 纯中文界面也优先走 OSS
+    if (lang.startsWith('zh')) {
+      return true;
+    }
+  } catch (e) {
+    // 出错时默认走 GitHub（更可靠）
+  }
+  return false;
+}
+
+// Download handler - 智能分流下载
 function handleDownload(event) {
   event.preventDefault();
   
@@ -45,7 +75,17 @@ function handleDownload(event) {
   }
   
   const version = latestRelease.version;  // e.g. "1.0.11"
-  const downloadUrl = `${OSS_BASE_URL}Alight-Pro-${version}.dmg`;
+  const dmfileName = `Alight-Pro-${version}.dmg`;
+  
+  // 智能选择下载源
+  let downloadUrl;
+  if (isChinaUser()) {
+    downloadUrl = `${OSS_BASE_URL}${dmfileName}`;
+    console.log(`🇨🇳 检测到国内用户，使用阿里云 OSS 下载`);
+  } else {
+    downloadUrl = `${GITHUB_RELEASE_BASE}v${version}/${dmfileName}`;
+    console.log(`🌍 检测到国外用户，使用 GitHub Releases 下载`);
+  }
   
   // 按钮状态反馈
   const originalHTML = btn.innerHTML;

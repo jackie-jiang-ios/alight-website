@@ -1,5 +1,5 @@
 /* ============================================
-   LiteApps - 官网交互脚本（支持中英双语）
+   Alight - 官网交互脚本（支持中英双语）
    ============================================ */
 
 // ========== 多语言配置 ==========
@@ -11,8 +11,6 @@ const i18n = {
     nav_architecture: '架构',
     nav_download: '下载',
     nav_free_download: '免费下载',
-    nav_products: '产品',
-    nav_about: '关于',
     
     // Hero
     hero_badge: '🧹 LiteApps 出品',
@@ -232,40 +230,6 @@ const i18n = {
     col_name: '名称',
     col_time: '修改时间',
     col_size: '大小',
-
-    // ====== 品牌首页特有 ======
-    hero_badge_brand: '🚀 轻量 · 快速 · 安全',
-    hero_title_brand_1: '打造最轻量的',
-    hero_title_brand_2: 'Mac 工具集',
-    hero_subtitle_brand: 'LiteApps 专注于为 macOS 开发极致轻量的工具类应用\n基于 JS + Native Bridge 架构，每款 App 仅 ~10MB',
-    btn_view_products: '查看产品',
-    products_title: '我们的产品',
-    products_subtitle: '每一款都精心打造，只为更好的体验',
-    badge_featured: '主打产品',
-    badge_coming_soon: '敬请期待',
-    alight_tagline: '轻量级 Mac 系统清理与优化工具',
-    alight_desc: '深度清理、快速清理、应用管理、启动项管理、进程管理、桌面清理 — 六大核心功能，一站式解决你的 Mac 清理需求。',
-    coming_soon_title: '更多产品',
-    coming_soon_tagline: '我们正在开发更多实用工具...',
-    coming_soon_desc: '我们计划推出更多轻量级 Mac 工具，涵盖效率提升、开发者工具等方向。如果你有好的想法，欢迎告诉我们！',
-    idea_efficiency: '效率工具',
-    idea_devtools: '开发者工具',
-    idea_productivity: '生产力',
-    idea_security: '安全隐私',
-    label_free: '免费',
-    label_stay_tuned: '持续规划中',
-    tech_advantage_title: '为什么选择 LiteApps？',
-    tech_advantage_subtitle: '我们重新定义了 Mac 应用的开发方式',
-    highlight_4_title: '统一架构',
-    highlight_4_desc: '所有产品共享同一套技术栈，一致的用户体验和代码质量',
-    arch_arrow_bridge: '↓ IPC Bridge ↓',
-    arch_arrow_native: '↓ Native Call ↓',
-    cta_title: '开始使用 Alight',
-    cta_desc: '我们的首款产品已经发布，免费下载体验！',
-    cta_btn: '立即免费下载 →',
-    cta_note: '或访问 Alight 产品页面 了解更多详情',
-    footer_connect: '联系我们',
-    footer_email: 'Email',
   },
   
   en: {
@@ -275,8 +239,6 @@ const i18n = {
     nav_architecture: 'Architecture',
     nav_download: 'Download',
     nav_free_download: 'Free Download',
-    nav_products: 'Products',
-    nav_about: 'About',
     
     // Hero
     hero_badge: '🧹 By LiteApps',
@@ -496,40 +458,6 @@ const i18n = {
     col_name: 'Name',
     col_time: 'Modified',
     col_size: 'Size',
-
-    // ====== Brand Homepage Specific ======
-    hero_badge_brand: '🚀 Lightweight · Fast · Secure',
-    hero_title_brand_1: 'Building the Lightest',
-    hero_title_brand_2: 'Mac Toolkit',
-    hero_subtitle_brand: 'LiteApps focuses on building ultra-lightweight utility apps for macOS\nPowered by JS + Native Bridge architecture, each App is only ~10MB',
-    btn_view_products: 'View Products',
-    products_title: 'Our Products',
-    products_subtitle: 'Each one crafted with care, for a better experience',
-    badge_featured: 'Featured',
-    badge_coming_soon: 'Coming Soon',
-    alight_tagline: 'Lightweight Mac System Cleaner & Optimizer',
-    alight_desc: 'Deep Clean, Quick Clean, App Manager, Startup Manager, Process Manager, Desktop Cleaner — six core features in one solution for all your Mac cleaning needs.',
-    coming_soon_title: 'More Products',
-    coming_soon_tagline: 'We are developing more useful tools...',
-    coming_soon_desc: 'We plan to release more lightweight Mac tools covering productivity, developer utilities and more. Have an idea? Let us know!',
-    idea_efficiency: 'Productivity',
-    idea_devtools: 'Developer Tools',
-    idea_productivity: 'Efficiency',
-    idea_security: 'Privacy & Security',
-    label_free: 'Free',
-    label_stay_tuned: 'In Planning',
-    tech_advantage_title: 'Why LiteApps?',
-    tech_advantage_subtitle: "We've redefined how Mac apps are built",
-    highlight_4_title: 'Unified Architecture',
-    highlight_4_desc: 'All products share the same tech stack — consistent UX and code quality',
-    arch_arrow_bridge: '↓ IPC Bridge ↓',
-    arch_arrow_native: '↓ Native Call ↓',
-    cta_title: 'Get Started with Alight',
-    cta_desc: 'Our first product is ready — download it free!',
-    cta_btn: 'Download Free →',
-    cta_note: 'Or visit the Alight product page for more details',
-    footer_connect: 'Connect',
-    footer_email: 'Email',
   }
 };
 
@@ -822,12 +750,10 @@ document.addEventListener('DOMContentLoaded', () => {
     langSwitch.addEventListener('click', toggleLanguage);
   }
   
-  // 只在产品页面获取版本信息（品牌首页不需要）
-  if (document.getElementById('version')) {
-    fetchLatestVersion();
-  }
+  // 获取版本信息
+  fetchLatestVersion();
 });
 
-console.log('%c✦ LiteApps %c- Building the lightest Mac toolkit', 
+console.log('%c✦ Alight by LiteApps %c- Make your Mac lighter', 
   'color: #818cf8; font-size: 18px; font-weight: bold;', 
   'color: #64748b; font-size: 14px;');

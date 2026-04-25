@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我们 | Alight - LiteApps</title>
+  <meta name="description" content="了解 LiteApps - 打造最轻量的 Mac 工具集">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .about-page {
+      padding: 120px 0 80px;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      min-height: 100vh;
+    }
+    .about-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .about-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .about-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .about-header .subtitle {
+      color: #6b7280;
+      font-size: 1.1rem;
+    }
+    .about-content {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    }
+    .about-section {
+      margin-bottom: 40px;
+    }
+    .about-section:last-child {
+      margin-bottom: 0;
+    }
+    .about-section h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .about-section p {
+      color: #4b5563;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .about-section ul {
+      color: #4b5563;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+    .about-section li {
+      margin-bottom: 8px;
+    }
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .value-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .value-card .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    .value-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    .value-card p {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin: 0;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .contact-card {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .contact-card .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: #3b82f6;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    .contact-card .contact-info h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1e40af;
+      margin-bottom: 4px;
+    }
+    .contact-card .contact-info p {
+      font-size: 0.9rem;
+      color: #3b82f6;
+      margin: 0;
+    }
+    .contact-card .contact-info a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    .contact-card .contact-info a:hover {
+      text-decoration: underline;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-left: 4px solid #22c55e;
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+    .highlight-box p {
+      color: #166534;
+      margin: 0;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #6366f1;
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #4f46e5;
+    }
+    @media (max-width: 768px) {
+      .about-content {
+        padding: 24px;
+      }
+      .about-header h1 {
+        font-size: 2rem;
+      }
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">Alight</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="/#features">功能</a>
+        <a href="/#download">下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="about-page">
+    <div class="about-container">
+      <a href="/" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回首页
+      </a>
+      
+      <div class="about-header">
+        <h1>✦ 关于 LiteApps</h1>
+        <p class="subtitle">打造最轻量的 Mac 工具集</p>
+      </div>
+
+      <div class="about-content">
+        <div class="about-section">
+          <h2>🎯 我们是谁</h2>
+          <p>LiteApps 是一个专注于 Mac 平台的独立软件开发团队。我们相信优秀的工具应该是<strong>轻量、高效、可靠</strong>的，而不是臃肿、缓慢、复杂的。</p>
+          <p>Alight 是我们的首款产品，采用创新的 JS + Native Bridge 架构，在保持 Web 开发灵活性的同时，提供原生级别的性能体验。</p>
+        </div>
+
+        <div class="about-section">
+          <h2>💎 我们的理念</h2>
+          <div class="value-grid">
+            <div class="value-card">
+              <div class="icon">🪶</div>
+              <h3>轻量至上</h3>
+              <p>安装包 &lt;10MB，远小于同类产品</p>
+            </div>
+            <div class="value-card">
+              <div class="icon">⚡</div>
+              <h3>极速体验</h3>
+              <p>原生代码执行，毫秒级响应</p>
+            </div>
+            <div class="value-card">
+              <div class="icon">🔒</div>
+              <h3>隐私优先</h3>
+              <p>本地处理，不上传任何数据</p>
+            </div>
+            <div class="value-card">
+              <div class="icon">🛠️</div>
+              <h3>实用主义</h3>
+              <p>只做真正有用的功能</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h2>🚀 为什么选择 Alight</h2>
+          <p>市场上已有许多 Mac 清理工具，但它们往往存在以下问题：</p>
+          <ul>
+            <li><strong>体积臃肿：</strong>基于 Electron 等框架，动辄 100MB+</li>
+            <li><strong>订阅收费：</strong>年费高昂，免费版功能受限</li>
+            <li><strong>隐私担忧：</strong>云端分析、数据收集、广告推送</li>
+            <li><strong>性能拖沓：</strong>资源占用高，拖慢系统速度</li>
+          </ul>
+          <p>Alight 的诞生正是为了解决这些痛点。</p>
+          <div class="highlight-box">
+            <p><strong>免费、轻量、本地运行</strong>——这就是我们想要打造的 Mac 清理工具。</p>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h2>📬 联系我们</h2>
+          <p>如有任何问题、建议或反馈，欢迎通过以下方式联系我们：</p>
+          <div class="contact-grid">
+            <div class="contact-card">
+              <div class="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </div>
+              <div class="contact-info">
+                <h3>GitHub Issues</h3>
+                <p><a href="https://github.com/jackie-jiang-ios/alight/issues" target="_blank" rel="noopener noreferrer">提交问题或建议</a></p>
+              </div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </div>
+              <div class="contact-info">
+                <h3>GitHub Releases</h3>
+                <p><a href="https://github.com/jackie-jiang-ios/alight/releases" target="_blank" rel="noopener noreferrer">查看更新日志</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h2>🔮 未来计划</h2>
+          <p>我们正在持续改进 Alight，并计划推出更多轻量级 Mac 工具。如果您有好的想法或建议，欢迎通过 GitHub Issues 告诉我们。</p>
+        </div>
+
+        <hr style="margin: 48px 0; border: none; border-top: 1px solid #e5e7eb;">
+        
+        <p style="text-align: center; color: #9ca3af; font-size: 0.9rem;">
+          © 2026 LiteApps. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

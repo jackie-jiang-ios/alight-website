@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alight - 轻量级 Mac 清理工具 | LiteApps</title>
-  <meta name="description" content="Alight 是一款轻量级 Mac 系统清理与优化工具，支持深度清理、快速清理、应用管理、启动项管理、进程管理、桌面清理等，基于 JS + Native Bridge 架构，安装包仅 10MB。">
-  <meta name="keywords" content="Mac清理,Alight,LiteApps,深度清理,快速清理,应用卸载,启动项管理,进程管理,桌面清理,Mac优化">
+  <title>LiteApps - 打造最轻量的 Mac 工具集</title>
+  <meta name="description" content="LiteApps 致力于打造最轻量的 Mac 工具集。基于 JS + Native Bridge 创新架构，每款 App 仅 ~10MB，远超 Electron 方案。">
+  <meta name="keywords" content="LiteApps,Mac工具,轻量级应用,Alight,Mac清理,macOS应用">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,724 +15,157 @@
     <div class="nav-container">
       <a href="/" class="nav-logo">
         <span class="logo-icon">✦</span>
-        <span class="logo-text">Alight</span>
+        <span class="logo-text">LiteApps</span>
       </a>
       <div class="nav-links">
-        <a href="#features" data-i18n="nav_features">功能</a>
-        <a href="#screenshots" data-i18n="nav_screenshots">预览</a>
-        <a href="#architecture" data-i18n="nav_architecture">架构</a>
-        <a href="#download" data-i18n="nav_download">下载</a>
+        <a href="#products" data-i18n="nav_products">产品</a>
+        <a href="#about" data-i18n="nav_about">关于</a>
       </div>
       <button id="langSwitch" class="lang-switch" title="Switch to English">EN</button>
-      <a href="#download" class="nav-download-btn" data-i18n="nav_free_download">免费下载</a>
     </div>
   </nav>
 
   <!-- Hero 区域 -->
-  <section class="hero">
+  <section class="hero hero-brand">
     <div class="hero-container">
-      <div class="hero-badge" data-i18n="hero_badge">🧹 LiteApps 出品</div>
+      <div class="hero-badge" data-i18n="hero_badge">🚀 轻量 · 快速 · 安全</div>
       <h1 class="hero-title">
-        <!-- 由 JS 动态填充 -->
+        <span data-i18n="hero_title_1">打造最轻量的</span><br>
+        <span class="gradient-text" data-i18n="hero_title_2">Mac 工具集</span>
       </h1>
-      <p class="hero-subtitle">
-        <!-- 由 JS 动态填充 -->
+      <p class="hero-subtitle" data-i18n="hero_subtitle">
+        LiteApps 专注于为 macOS 开发极致轻量的工具类应用<br>
+        基于 JS + Native Bridge 架构，每款 App 仅 ~10MB
       </p>
       <div class="hero-actions">
-        <a href="#download" class="btn btn-primary btn-lg">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span data-i18n="btn_download">免费下载</span>
-        </a>
-        <a href="#features" class="btn btn-secondary btn-lg" data-i18n="btn_learn_more">了解更多</a>
+        <a href="#products" class="btn btn-primary btn-lg" data-i18n="btn_view_products">查看产品</a>
+        <a href="#about" class="btn btn-secondary btn-lg" data-i18n="btn_learn_more">了解更多</a>
       </div>
       <div class="hero-meta">
-        <span class="meta-item" data-i18n="meta_scan">⚡ 秒级扫描</span>
+        <span class="meta-item" data-i18n="meta_apps">📦 每款 App &lt;10MB</span>
         <span class="meta-divider">·</span>
-        <span class="meta-item" data-i18n="meta_size">📦 &lt;10MB</span>
+        <span class="meta-item" data-i18n="meta_native">⚡ 原生性能</span>
         <span class="meta-divider">·</span>
         <span class="meta-item" data-i18n="meta_safe">🔒 安全可靠</span>
       </div>
     </div>
-    <div class="hero-visual">
-      <!-- 模拟 DeepCleanView - 完全匹配真实 StatusOverview + CleanCardGrid -->
-      <div class="mac-window">
-        <div class="mac-window-header">
-          <div class="window-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-          </div>
-          <span class="window-title">Alight — 深度清理</span>
-        </div>
-        <div class="mac-window-body">
-          <div class="mock-deepclean">
-            <!-- StatusOverview: 标题栏 + 扫描按钮 -->
-            <div class="dc-header">
-              <h3>深度清理</h3>
-              <button class="dc-scan-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                开始扫描
-              </button>
-            </div>
-
-            <!-- StatusOverview: 四宫格统计卡片（使用真实颜色） -->
-            <div class="dc-stats-grid">
-              <div class="dc-stat-card stat-cache">
-                <span class="dc-stat-value">856 MB</span>
-                <span class="dc-stat-label">缓存数据</span>
-              </div>
-              <div class="dc-stat-card stat-health">
-                <span class="dc-stat-value health-good">良好</span>
-                <span class="dc-stat-label">健康评分</span>
-              </div>
-              <div class="dc-stat-card stat-count">
-                <span class="dc-stat-value">128 项</span>
-                <span class="dc-stat-label">建议清理</span>
-              </div>
-              <div class="dc-stat-card stat-space">
-                <span class="dc-stat-value">2.4 GB</span>
-                <span class="dc-stat-label">可释放空间</span>
-              </div>
-            </div>
-
-            <!-- CleanCardGrid: 2列卡片网格（匹配真实 DeepCleanCard） -->
-            <div class="dc-cards-grid">
-              <!-- APP_DATA 卡片 -->
-              <div class="dc-clean-card">
-                <div class="card-icon-bg card-icon-blue">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13l2 2 4-4"/></svg>
-                </div>
-                <div class="card-info">
-                  <span class="card-name">应用数据</span>
-                  <span class="card-desc">扫描应用产生的缓存和配置文件</span>
-                </div>
-                <div class="card-right">
-                  <span class="card-size">456 MB</span>
-                  <span class="card-count">24 个应用</span>
-                  <button class="card-btn">查看</button>
-                </div>
-              </div>
-              <!-- INSTALLER 卡片 -->
-              <div class="dc-clean-card">
-                <div class="card-icon-bg card-icon-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                </div>
-                <div class="card-info">
-                  <span class="card-name">安装包残留</span>
-                  <span class="card-desc">已删除应用的 DMG/PKG 安装包残留</span>
-                </div>
-                <div class="card-right">
-                  <span class="card-size">520 MB</span>
-                  <span class="card-count">12 项</span>
-                  <button class="card-btn">查看</button>
-                </div>
-              </div>
-              <!-- LARGE_FILES 卡片 -->
-              <div class="dc-clean-card">
-                <div class="card-icon-bg card-icon-orange">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                </div>
-                <div class="card-info">
-                  <span class="card-name">大文件</span>
-                  <span class="card-desc">占用大量磁盘空间的大文件</span>
-                </div>
-                <div class="card-right">
-                  <span class="card-size">680 MB</span>
-                  <span class="card-count">8 项</span>
-                  <button class="card-btn">查看</button>
-                </div>
-              </div>
-              <!-- OLD_FILES 卡片 -->
-              <div class="dc-clean-card">
-                <div class="card-icon-bg card-icon-purple">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div class="card-info">
-                  <span class="card-name">旧文件</span>
-                  <span class="card-desc">长期未访问的旧文件和过期数据</span>
-                </div>
-                <div class="card-right">
-                  <span class="card-size">320 MB</span>
-                  <span class="card-count">56 项</span>
-                  <button class="card-btn">查看</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 
-  <!-- 功能特性 -->
-  <section id="features" class="features">
+  <!-- 产品矩阵 -->
+  <section id="products" class="products-section">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title" data-i18n="section_features_title">六大核心功能</h2>
-        <p class="section-subtitle" data-i18n="section_features_subtitle">覆盖 Mac 清理优化的每一个场景</p>
+        <h2 class="section-title" data-i18n="products_title">我们的产品</h2>
+        <p class="section-subtitle" data-i18n="products_subtitle">每一款都精心打造，只为更好的体验</p>
       </div>
-      <div class="features-grid">
-        <!-- 深度清理 deep-clean -->
-        <div class="feature-card featured">
-          <div class="feature-badge" data-i18n="badge_core">核心功能</div>
-          <div class="feature-icon">🔬</div>
-          <h3 data-i18n="feat_deep_clean_name">深度清理</h3>
-          <p data-i18n="feat_deep_clean_desc">全盘深度扫描，识别安装包残留、大文件、旧文件、应用数据等垃圾。支持按类别预览详情，一键精准清理。</p>
-          <div class="feature-tags">
-            <span class="tag" data-i18n="tag_installer">安装包残留</span>
-            <span class="tag" data-i18n="tag_large_files">大文件扫描</span>
-            <span class="tag" data-i18n="tag_old_files">旧文件</span>
-            <span class="tag" data-i18n="tag_app_data">应用数据</span>
+
+      <div class="product-grid">
+        <!-- Alight 产品卡片 -->
+        <a href="alight/" class="product-card featured">
+          <div class="product-card-header">
+            <div class="product-icon product-icon-alight">🧹</div>
+            <div class="product-info">
+              <div class="product-name-row">
+                <h3 class="product-name">Alight</h3>
+                <span class="product-badge" data-i18n="badge_featured">主打产品</span>
+              </div>
+              <p class="product-tagline" data-i18n="alight_tagline">轻量级 Mac 系统清理与优化工具</p>
+            </div>
           </div>
-        </div>
-        <!-- 快速清理 quick-clean -->
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3 data-i18n="feat_quick_clean_name">快速清理</h3>
-          <p data-i18n="feat_quick_clean_desc">一键智能扫描系统缓存、日志、临时文件等常见垃圾，配合健康评分，快速释放空间。</p>
-          <div class="feature-tags">
-            <span class="tag" data-i18n="tag_cache">系统缓存</span>
-            <span class="tag" data-i18n="tag_logs">日志文件</span>
-            <span class="tag" data-i18n="tag_temp">临时文件</span>
-            <span class="tag" data-i18n="tag_trash">废纸篓</span>
+          <p class="product-desc" data-i18n="alight_desc">
+            深度清理、快速清理、应用管理、启动项管理、进程管理、桌面清理 — 六大核心功能，一站式解决你的 Mac 清理需求。
+          </p>
+          <div class="product-features-list">
+            <span class="feature-tag" data-i18n="feat_deep_clean_name">深度清理</span>
+            <span class="feature-tag" data-i18n="feat_quick_clean_name">快速清理</span>
+            <span class="feature-tag" data-i18n="feat_app_manage_name">应用管理</span>
+            <span class="feature-tag" data-i18n="feat_startup_name">启动项管理</span>
+            <span class="feature-tag" data-i18n="feat_process_name">进程管理</span>
+            <span class="feature-tag" data-i18n="feat_desktop_name">桌面清理</span>
           </div>
-        </div>
-        <!-- 应用管理 app-manage -->
-        <div class="feature-card">
-          <div class="feature-icon">📱</div>
-          <h3 data-i18n="feat_app_manage_name">应用管理</h3>
-          <p data-i18n="feat_app_manage_desc">查看所有已安装应用，按大小/名称/使用时间排序。彻底卸载应用并自动清理关联的缓存和配置残留。</p>
-          <div class="feature-tags">
-            <span class="tag" data-i18n="tag_app_list">应用列表</span>
-            <span class="tag" data-i18n="tag_uninstall">彻底卸载</span>
-            <span class="tag" data-i18n="tag_residuals">残留清理</span>
-            <span class="tag" data-i18n="tag_force_quit">强制终止</span>
+          <div class="product-footer">
+            <div class="product-meta">
+              <span>~10 MB</span>
+              <span>·</span>
+              <span>macOS 12.0+</span>
+              <span>·</span>
+              <span data-i18n="label_free">免费</span>
+            </div>
+            <span class="product-arrow">→</span>
           </div>
-        </div>
-        <!-- 启动项管理 startup-manager -->
-        <div class="feature-card">
-          <div class="feature-icon">🚀</div>
-          <h3 data-i18n="feat_startup_name">启动项管理</h3>
-          <p data-i18n="feat_startup_desc">管理系统登录项和后台活动（LaunchAgents/LaunchDaemons），一键禁用不必要的开机启动项，加速开机。</p>
-          <div class="feature-tags">
-            <span class="tag" data-i18n="tag_login_items">登录项</span>
-            <span class="tag" data-i18n="tag_bg_services">后台服务</span>
-            <span class="tag" data-i18n="tag_filter">分类筛选</span>
-            <span class="tag" data-i18n="tag_toggle">开关控制</span>
+        </a>
+
+        <!-- 即将推出的产品卡片 -->
+        <div class="product-card coming-soon">
+          <div class="product-card-header">
+            <div class="product-icon product-icon-placeholder">🔮</div>
+            <div class="product-info">
+              <div class="product-name-row">
+                <h3 class="product-name" data-i18n="coming_soon_title">更多产品</h3>
+                <span class="product-badge badge-soon" data-i18n="badge_coming_soon">敬请期待</span>
+              </div>
+              <p class="product-tagline" data-i18n="coming_soon_tagline">我们正在开发更多实用工具...</p>
+            </div>
           </div>
-        </div>
-        <!-- 进程管理 process-manager -->
-        <div class="feature-card">
-          <div class="feature-icon">💻</div>
-          <h3 data-i18n="feat_process_name">进程管理</h3>
-          <p data-i18n="feat_process_desc">实时查看所有运行中的进程，按系统/应用/其他分类筛选，支持搜索和多选批量结束占用资源的进程。</p>
-          <div class="feature-tags">
-            <span class="tag" data-i18n="tag_proc_list">进程列表</span>
-            <span class="tag" data-i18n="tag_cpu_mem">CPU/内存</span>
-            <span class="tag" data-i18n="tag_batch_kill">批量终止</span>
-            <span class="tag" data-i18n="tag_search">搜索筛选</span>
+          <p class="product-desc" data-i18n="coming_soon_desc">
+            我们计划推出更多轻量级 Mac 工具，涵盖效率提升、开发者工具等方向。如果你有好的想法，欢迎告诉我们！
+          </p>
+          <div class="product-features-list">
+            <span class="feature-tag disabled" data-i18n="idea_efficiency">效率工具</span>
+            <span class="feature-tag disabled" data-i18n="idea_devtools">开发者工具</span>
+            <span class="feature-tag disabled" data-i18n="idea_productivity">生产力</span>
+            <span class="feature-tag disabled" data-i18n="idea_security">安全隐私</span>
           </div>
-        </div>
-        <!-- 桌面清理 desktop-clean -->
-        <div class="feature-card">
-          <div class="feature-icon">🖥️</div>
-          <h3 data-i18n="feat_desktop_name">桌面清理</h3>
-          <p data-i18n="feat_desktop_desc">扫描桌面上的所有文件，按类型分组展示，支持列表/网格视图切换，快速整理杂乱的桌面。</p>
-          <div class="feature-tags">
-            <span class="tag" data-i18n="tag_desk_scan">桌面扫描</span>
-            <span class="tag" data-i18n="tag_file_type">文件分类</span>
-            <span class="tag" data-i18n="tag_preview">预览查看</span>
-            <span class="tag" data-i18n="tag_quick_ops">快捷操作</span>
+          <div class="product-footer">
+            <div class="product-meta">
+              <span data-i18n="label_stay_tuned">持续规划中</span>
+            </div>
+            <span class="product-arrow muted">🔒</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 产品亮点 -->
+  <!-- 技术优势 -->
   <section class="highlights">
     <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="tech_advantage_title">为什么选择 LiteApps？</h2>
+        <p class="section-subtitle" data-i18n="tech_advantage_subtitle">我们重新定义了 Mac 应用的开发方式</p>
+      </div>
       <div class="highlights-grid">
         <div class="highlight-item">
-          <div class="highlight-number" data-i18n="highlight_1_num">01</div>
+          <div class="highlight-number">01</div>
           <h3 data-i18n="highlight_1_title">超小体积</h3>
-          <p data-i18n="highlight_1_desc">安装包小于 10MB，对比 Electron 类产品（通常 100MB+）小 90%</p>
+          <p data-i18n="highlight_1_desc">每款 App 安装包小于 10MB，对比 Electron 类产品（通常 100MB+）小 90%</p>
         </div>
         <div class="highlight-item">
-          <div class="highlight-number" data-i18n="highlight_2_num">02</div>
+          <div class="highlight-number">02</div>
           <h3 data-i18n="highlight_2_title">极速体验</h3>
-          <p data-i18n="highlight_2_desc">JS + Native Bridge 架构，原生 Objective-C 执行扫描任务，速度远超纯 JS 方案</p>
+          <p data-i18n="highlight_2_desc">JS + Native Bridge 架构，原生 Objective-C 执行任务，速度远超纯 JS 方案</p>
         </div>
         <div class="highlight-item">
-          <div class="highlight-number" data-i18n="highlight_3_num">03</div>
+          <div class="highlight-number">03</div>
           <h3 data-i18n="highlight_3_title">安全可靠</h3>
-          <p data-i18n="highlight_3_desc">每一步操作都可预览确认，只清理确定的垃圾文件，绝不误删用户重要数据</p>
+          <p data-i18n="highlight_3_desc">Apple 开发者签名 + 公证（Notarized），每一步操作可预览确认</p>
         </div>
         <div class="highlight-item">
-          <div class="highlight-number" data-i18n="highlight_4_num">04</div>
-          <h3 data-i18n="highlight_4_title">六大模块</h3>
-          <p data-i18n="highlight_4_desc">深度清理、快速清理、应用管理、启动项、进程管理、桌面清理，一站式解决</p>
+          <div class="highlight-number">04</div>
+          <h3 data-i18n="highlight_4_title">统一架构</h3>
+          <p data-i18n="highlight_4_desc">所有产品共享同一套技术栈，一致的用户体验和代码质量</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 截图展示 - 完全匹配真实 UI -->
-  <section id="screenshots" class="screenshots">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title" data-i18n="section_screenshots_title">界面预览</h2>
-        <p class="section-subtitle" data-i18n="section_screenshots_subtitle">基于 Vue 3 + Element Plus 构建的精致界面</p>
-      </div>
-      <div class="screenshots-grid">
-        <!-- 截图1: 深度清理 - 匹配真实 StatusOverview + DeepCleanCard -->
-        <div class="screenshot-card">
-          <div class="screenshot-mock mock-deepclean-preview">
-            <div class="mock-mac-bar">
-              <span class="mock-dot red"></span>
-              <span class="mock-dot yellow"></span>
-              <span class="mock-dot green"></span>
-            </div>
-            <div class="mock-body dc-preview-body">
-              <div class="dc-prev-header">
-                <span class="dc-prev-title">深度清理</span>
-                <span class="dc-prev-btn">⚡ 开始扫描</span>
-              </div>
-              <div class="dc-prev-stats">
-                <div class="dc-ps stat-cache"><b>856 MB</b><small>缓存数据</small></div>
-                <div class="dc-ps stat-health"><b class="health-good">良好</b><small>健康评分</small></div>
-                <div class="dc-ps stat-count"><b>128 项</b><small>建议清理</small></div>
-                <div class="dc-ps stat-space"><b>2.4 GB</b><small>可释放空间</small></div>
-              </div>
-              <div class="dc-prev-cards">
-                <div class="dcp-card">
-                  <div class="dcp-icon dcp-icon-blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-                  <div class="dcp-info"><b>应用数据</b><span>扫描应用缓存和配置文件</span></div>
-                  <div class="dcp-meta"><b>456 MB</b><span>24个应用</span></div>
-                  <span class="dcp-arrow">›</span>
-                </div>
-                <div class="dcp-card">
-                  <div class="dcp-icon dcp-icon-green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-                  <div class="dcp-info"><b>安装包残留</b><span>DMG/PKG 安装包残留</span></div>
-                  <div class="dcp-meta"><b>520 MB</b><span>12项</span></div>
-                  <span class="dcp-arrow">›</span>
-                </div>
-                <div class="dcp-card">
-                  <div class="dcp-icon dcp-icon-orange"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                  <div class="dcp-info"><b>大文件</b><span>占用大量空间的文件</span></div>
-                  <div class="dcp-meta"><b>680 MB</b><span>8项</span></div>
-                  <span class="dcp-arrow">›</span>
-                </div>
-                <div class="dcp-card">
-                  <div class="dcp-icon dcp-icon-purple"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-                  <div class="dcp-info"><b>旧文件</b><span>长期未访问的文件</span></div>
-                  <div class="dcp-meta"><b>320 MB</b><span>56项</span></div>
-                  <span class="dcp-arrow">›</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p data-i18n="shot_deep_clean">深度清理 — 全盘扫描与四维统计</p>
-        </div>
-
-        <!-- 截图2: 应用管理 - 匹配真实 AppManageResults + AppItem -->
-        <div class="screenshot-card">
-          <div class="screenshot-mock mock-app-manage-preview">
-            <div class="mock-mac-bar">
-              <span class="mock-dot red"></span>
-              <span class="mock-dot yellow"></span>
-              <span class="mock-dot green"></span>
-            </div>
-            <div class="mock-body am-preview-body">
-              <!-- 顶部排序栏 -->
-              <div class="am-toolbar">
-                <span class="am-total">共 48 个应用</span>
-                <div class="am-sort-group">
-                  <span class="am-sort-label">排序</span>
-                  <span class="am-sort-select">大小 ▼</span>
-                  <span class="am-sort-order">降序</span>
-                </div>
-              </div>
-              <!-- 应用列表 - 匹配真实 AppItem -->
-              <div class="am-app-list">
-                <div class="am-app-row">
-                  <div class="am-app-icon">🎮</div>
-                  <div class="am-app-info">
-                    <span class="am-app-name">Steam</span>
-                    <span class="am-app-path">/Applications/Steam.app · 3天前使用</span>
-                  </div>
-                  <span class="am-app-size">3.2 GB</span>
-                  <button class="am-uninstall-btn">卸载</button>
-                </div>
-                <div class="am-app-row">
-                  <div class="am-app-icon">💻</div>
-                  <div class="am-app-info">
-                    <span class="am-app-name">Xcode</span>
-                    <span class="am-app-path">/Developer/Xcode.app · 今天使用</span>
-                  </div>
-                  <span class="am-app-size">2.8 GB</span>
-                  <button class="am-uninstall-btn">卸载</button>
-                </div>
-                <div class="am-app-row">
-                  <div class="am-app-icon">🌐</div>
-                  <div class="am-app-info">
-                    <span class="am-app-name">Google Chrome</span>
-                    <span class="am-app-path">/Applications/Google Chrome.app · 刚刚使用</span>
-                  </div>
-                  <span class="am-app-size">856 MB</span>
-                  <button class="am-uninstall-btn">卸载</button>
-                </div>
-                <div class="am-app-row">
-                  <div class="am-app-icon">🎵</div>
-                  <div class="am-app-info">
-                    <span class="am-app-name">Spotify</span>
-                    <span class="am-app-path">/Applications/Spotify.app · 从未使用</span>
-                  </div>
-                  <span class="am-app-size">420 MB</span>
-                  <button class="am-uninstall-btn">卸载</button>
-                </div>
-                <div class="am-app-row">
-                  <div class="am-app-icon">💬</div>
-                  <div class="am-app-info">
-                    <span class="am-app-name">WeChat</span>
-                    <span class="am-app-path">/Applications/WeChat.app · 2小时前使用</span>
-                  </div>
-                  <span class="am-app-size">380 MB</span>
-                  <button class="am-uninstall-btn">卸载</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p data-i18n="shot_app_manage">应用管理 — 彻底卸载与残留清理</p>
-        </div>
-
-        <!-- 截图3: 快速清理 - 匹配真实 QuickCleanCard -->
-        <div class="screenshot-card">
-          <div class="screenshot-mock mock-quickclean-preview">
-            <div class="mock-mac-bar">
-              <span class="mock-dot red"></span>
-              <span class="mock-dot yellow"></span>
-              <span class="mock-dot green"></span>
-            </div>
-            <div class="mock-body qc-preview-body">
-              <div class="qc-prev-header">
-                <span class="qc-prev-title">快速清理</span>
-                <span class="qc-prev-btn">⚡ 开始扫描</span>
-              </div>
-              <div class="qc-prev-stats">
-                <div class="qc-ps stat-cache"><b>1.2 GB</b><small>缓存数据</small></div>
-                <div class="qc-ps stat-health"><b class="health-good">85分</b><small>健康评分</small></div>
-                <div class="qc-ps stat-count"><b>256 项</b><small>建议清理</small></div>
-                <div class="qc-ps stat-space"><b>1.8 GB</b><small>可释放空间</small></div>
-              </div>
-              <div class="qc-prev-cards">
-                <div class="qcp-card">
-                  <div class="qcp-icon qcp-icon-blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-                  <div class="qcp-info"><b>系统缓存</b><span>应用和系统产生的缓存文件</span></div>
-                  <div class="qcp-meta"><b>520 MB</b><span>128项</span></div>
-                  <div class="qcp-actions">
-                    <button class="qcp-btn-preview">预览</button>
-                    <button class="qcp-btn-clean">智能清理</button>
-                  </div>
-                </div>
-                <div class="qcp-card">
-                  <div class="qcp-icon qcp-icon-orange"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8h-2a2 2 0 0 1-2-2V2z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
-                  <div class="qcp-info"><b>日志文件</b><span>系统和应用的日志记录</span></div>
-                  <div class="qcp-meta"><b>280 MB</b><span>64项</span></div>
-                  <div class="qcp-actions">
-                    <button class="qcp-btn-preview">预览</button>
-                    <button class="qcp-btn-clean">智能清理</button>
-                  </div>
-                </div>
-                <div class="qcp-card">
-                  <div class="qcp-icon qcp-icon-green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></div>
-                  <div class="qcp-info"><b>临时文件</b><span>系统和应用产生的临时文件</span></div>
-                  <div class="qcp-meta"><b>156 MB</b><span>42项</span></div>
-                  <div class="qcp-actions">
-                    <button class="qcp-btn-preview">预览</button>
-                    <button class="qcp-btn-clean">智能清理</button>
-                  </div>
-                </div>
-                <div class="qcp-card">
-                  <div class="qcp-icon qcp-icon-red"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
-                  <div class="qcp-info"><b>废纸篓</b><span>废纸篓中的可清理文件</span></div>
-                  <div class="qcp-meta"><b>840 MB</b><span>22项</span></div>
-                  <div class="qcp-actions">
-                    <button class="qcp-btn-preview">预览</button>
-                    <button class="qcp-btn-clean">清空</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p data-i18n="shot_quick_clean">快速清理 — 一键智能清理</p>
-        </div>
-
-        <!-- 截图4: 启动项管理 - 匹配真实 startup-manager + StartupItemCard -->
-        <div class="screenshot-card">
-          <div class="screenshot-mock mock-startup-preview">
-            <div class="mock-mac-bar">
-              <span class="mock-dot red"></span>
-              <span class="mock-dot yellow"></span>
-              <span class="mock-dot green"></span>
-            </div>
-            <div class="mock-body su-preview-body">
-              <!-- 页面 Header Banner (page-header) -->
-              <div class="su-page-header">
-                <span class="su-header-icon">⚙️</span>
-                <div class="su-header-content">
-                  <span class="su-header-title">启动项管理</span>
-                  <span class="su-header-desc">管理开机自启的应用和服务</span>
-                </div>
-              </div>
-              <!-- 类型 Tab 切换 -->
-              <div class="su-tabs">
-                <span class="su-tab active">全部 15</span>
-                <span class="su-tab">登录项 8</span>
-                <span class="su-tab">后台活动 7</span>
-              </div>
-              <!-- 筛选 radio -->
-              <div class="su-filter-card">
-                <div class="su-radio-group">
-                  <span class="su-radio active">全部 15</span>
-                  <span class="su-radio">已启用 10</span>
-                  <span class="su-radio">已禁用 5</span>
-                </div>
-              </div>
-              <!-- 启动项列表 - 匹配真实 StartupItemCard -->
-              <div class="su-prev-list">
-                <div class="su-item">
-                  <div class="su-item-icon">🌐</div>
-                  <div class="su-item-info">
-                    <div class="su-item-name">
-                      Google Chrome Helper
-                      <span class="su-kind login">登录项</span>
-                    </div>
-                    <div class="su-item-path">~/Library/LaunchAgents/com.google.chrome.helper.plist</div>
-                  </div>
-                  <div class="su-item-actions">
-                    <button class="su-delete-btn">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                    </button>
-                    <div class="su-toggle on"></div>
-                  </div>
-                </div>
-                <div class="su-item">
-                  <div class="su-item-icon">☁️</div>
-                  <div class="su-item-info">
-                    <div class="su-item-name">
-                      iCloud Sync
-                      <span class="su-kind bg">后台活动</span>
-                      <span class="su-cat">系统</span>
-                    </div>
-                    <div class="su-item-path">/Library/LaunchDaemons/com.apple.icloud.sync.plist</div>
-                  </div>
-                  <div class="su-item-actions">
-                    <button class="su-delete-btn">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                    </button>
-                    <div class="su-toggle on"></div>
-                  </div>
-                </div>
-                <div class="su-item disabled">
-                  <div class="su-item-icon">🎵</div>
-                  <div class="su-item-info">
-                    <div class="su-item-name">
-                      Spotify
-                      <span class="su-kind login">登录项</span>
-                      <span class="su-cat-warn">建议关闭</span>
-                    </div>
-                    <div class="su-item-path">~/Library/LaunchAgents/com.spotify.client.plist</div>
-                  </div>
-                  <div class="su-item-actions">
-                    <button class="su-delete-btn">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                    </button>
-                    <div class="su-toggle off"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p data-i18n="shot_startup">启动项管理 — 加速你的 Mac 开机</p>
-        </div>
-
-        <!-- 截图5: 进程管理 - 匹配真实 process-manager -->
-        <div class="screenshot-card">
-          <div class="screenshot-mock mock-process-preview">
-            <div class="mock-mac-bar">
-              <span class="mock-dot red"></span>
-              <span class="mock-dot yellow"></span>
-              <span class="mock-dot green"></span>
-            </div>
-            <div class="mock-body pm-preview-body">
-              <!-- 页面 Header Banner -->
-              <div class="pm-page-header">
-                <span class="pm-header-icon">🖥️</span>
-                <div class="pm-header-content">
-                  <span class="pm-header-title">进程管理</span>
-                  <span class="pm-header-desc">实时监控和管理运行中的进程</span>
-                </div>
-                <div class="pm-header-actions">
-                  <button class="pm-btn-refresh">刷新</button>
-                  <button class="pm-btn-kill">结束选中 (0)</button>
-                </div>
-              </div>
-              <!-- 工具栏 Tab + 搜索 -->
-              <div class="pm-toolbar">
-                <div class="pm-tabs">
-                  <span class="pm-tab active">全部<span class="pm-tab-count">156</span></span>
-                  <span class="pm-tab">系统<span class="pm-tab-count">42</span></span>
-                  <span class="pm-tab">应用<span class="pm-tab-count">89</span></span>
-                  <span class="pm-tab">其他<span class="pm-tab-count">25</span></span>
-                </div>
-                <div class="pm-search">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                  <span>搜索进程...</span>
-                </div>
-              </div>
-              <!-- 进程列表 - 匹配真实 process-item -->
-              <div class="pm-list">
-                <div class="pm-item">
-                  <div class="pm-left">
-                    <div class="pm-checkbox checked"></div>
-                    <div class="pm-picon">🌐</div>
-                    <div class="pm-info">
-                      <div class="pm-name">Google Chrome<span class="pm-tag sys">系统</span></div>
-                      <div class="pm-path">com.google.Chrome</div>
-                    </div>
-                  </div>
-                  <div class="pm-right">
-                    <div class="pm-usage">
-                      <div class="pm-usage-row"><span class="pm-label">CPU</span><span class="pm-val usage-high">23.5%</span></div>
-                      <div class="pm-usage-row"><span class="pm-label">内存</span><span class="pm-val usage-medium">12.8%</span></div>
-                    </div>
-                    <span class="pm-pid">PID: 2841</span>
-                    <button class="pm-kill-btn">结束</button>
-                  </div>
-                </div>
-                <div class="pm-item selected">
-                  <div class="pm-left">
-                    <div class="pm-checkbox checked"></div>
-                    <div class="pm-picon">💻</div>
-                    <div class="pm-info">
-                      <div class="pm-name">Xcode</div>
-                      <div class="pm-path">com.apple.dt.Xcode</div>
-                    </div>
-                  </div>
-                  <div class="pm-right">
-                    <div class="pm-usage">
-                      <div class="pm-usage-row"><span class="pm-label">CPU</span><span class="pm-val usage-high">45.2%</span></div>
-                      <div class="pm-usage-row"><span class="pm-label">内存</span><span class="pm-val usage-high">18.6%</span></div>
-                    </div>
-                    <span class="pm-pid">PID: 8921</span>
-                    <button class="pm-kill-btn">结束</button>
-                  </div>
-                </div>
-                <div class="pm-item">
-                  <div class="pm-left">
-                    <div class="pm-checkbox"></div>
-                    <div class="pm-picon">🎵</div>
-                    <div class="pm-info">
-                      <div class="pm-name">Spotify</div>
-                      <div class="pm-path">com.spotify.client</div>
-                    </div>
-                  </div>
-                  <div class="pm-right">
-                    <div class="pm-usage">
-                      <div class="pm-usage-row"><span class="pm-label">CPU</span><span class="pm-val usage-low">1.2%</span></div>
-                      <div class="pm-usage-row"><span class="pm-label">内存</span><span class="pm-val usage-low">3.4%</span></div>
-                    </div>
-                    <span class="pm-pid">PID: 15234</span>
-                    <button class="pm-kill-btn">结束</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p data-i18n="shot_process">进程管理 — 实时监控与批量管理</p>
-        </div>
-
-        <!-- 截图6: 桌面清理 - 匹配真实 desktop-clean -->
-        <div class="screenshot-card">
-          <div class="screenshot-mock mock-desktop-preview">
-            <div class="mock-mac-bar">
-              <span class="mock-dot red"></span>
-              <span class="mock-dot yellow"></span>
-              <span class="mock-dot green"></span>
-            </div>
-            <div class="mock-body dt-preview-body">
-              <div class="dt-prev-header">
-                <span class="dt-prev-title">桌面清理</span>
-                <span class="dt-prev-btn">🔄 重新扫描</span>
-              </div>
-              <div class="dt-prev-summary">
-                <div>
-                  <span class="dt-total">2.1 GB</span>
-                  <span class="dt-detail">48 个文件 · 12 个文件夹</span>
-                </div>
-                <div class="dt-actions">
-                  <span class="dt-view-btn active">☰ 列表</span>
-                  <span class="dt-view-btn">⊞ 网格</span>
-                  <span class="dt-select-btn">全选</span>
-                  <button class="dt-delete-btn">删除选中 (0)</button>
-                </div>
-              </div>
-              <!-- 表头 -->
-              <div class="dt-table-header">
-                <span style="width:20px"></span>
-                <span style="width:32px"></span>
-                <span style="flex:1">名称</span>
-                <span style="width:100px;text-align:right">修改时间</span>
-                <span style="width:70px;text-align:right">大小</span>
-                <span style="width:40px"></span>
-              </div>
-              <!-- 文件列表 -->
-              <div class="dt-file-list">
-                <div class="dt-file-row">
-                  <input type="checkbox" checked>
-                  <span class="dt-file-icon">📄</span>
-                  <span class="dt-file-name">Screenshot_2024.png</span>
-                  <span class="dt-file-time">2024-01-15</span>
-                  <span class="dt-file-size">4.2 MB</span>
-                </div>
-                <div class="dt-file-row">
-                  <input type="checkbox" checked>
-                  <span class="dt-file-icon">📄</span>
-                  <span class="dt-file-name">报告文档.docx</span>
-                  <span class="dt-file-time">2024-01-10</span>
-                  <span class="dt-file-size">2.8 MB</span>
-                </div>
-                <div class="dt-file-row">
-                  <input type="checkbox">
-                  <span class="dt-file-icon">🖼️</span>
-                  <span class="dt-file-name">wallpaper.jpg</span>
-                  <span class="dt-file-time">2023-12-20</span>
-                  <span class="dt-file-size">8.5 MB</span>
-                </div>
-                <div class="dt-file-row">
-                  <input type="checkbox">
-                  <span class="dt-file-icon">📦</span>
-                  <span class="dt-file-name">project.zip</span>
-                  <span class="dt-file-time">2024-01-08</span>
-                  <span class="dt-file-size">156 MB</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p data-i18n="shot_desktop">桌面清理 — 整理你的桌面文件</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 技术架构 -->
-  <section id="architecture" class="architecture">
+  <!-- 技术架构简介 -->
+  <section id="about" class="architecture architecture-brand">
     <div class="container">
       <div class="arch-content">
         <div class="arch-text">
-          <h2 data-i18n="arch_title">为什么这么快？</h2>
-          <p data-i18n="arch_intro">Alight 采用创新的 <strong>JS + Native Bridge</strong> 三层架构：</p>
+          <h2 data-i18n="arch_title">创新架构</h2>
+          <p data-i18n="arch_intro">LiteApps 所有产品都基于创新的 <strong>JS + Native Bridge</strong> 三层架构：</p>
           <ul class="arch-list">
             <li>
               <strong data-i18n="arch_ui_name">UI 层 (Vue 3 + Element Plus)</strong><br>
@@ -747,19 +180,19 @@
               <small data-i18n="arch_native_desc">直接调用 macOS 系统 API，文件扫描、进程管理等极致性能</small>
             </li>
           </ul>
-          <p class="arch-note" data-i18n="arch_note">这种分层架构让 Alight 既拥有 Web 开发的灵活性，又具备原生应用的性能优势。安装包仅 ~10MB，内存占用极低，远优于传统 Electron 方案。</p>
+          <p class="arch-note" data-i18n="arch_note">这种分层架构让每款 App 既拥有 Web 开发的灵活性，又具备原生应用的性能优势。安装包仅 ~10MB，内存占用极低。</p>
         </div>
         <div class="arch-diagram">
           <div class="arch-layer layer-ui">
             <span class="layer-tech" data-i18n="layer_ui_tech">Vue 3 + Element Plus + TailwindCSS</span>
             <span data-i18n="layer_ui_label">UI Layer</span><br><small data-i18n="layer_ui_small">界面渲染 / 用户交互</small>
           </div>
-          <div class="arch-arrow">↓ IPC Bridge ↓</div>
+          <div class="arch-arrow" data-i18n="arch_arrow_bridge">↓ IPC Bridge ↓</div>
           <div class="arch-layer layer-bridge">
             <span class="layer-tech" data-i18n="layer_bridge_tech">Async Message Channel</span>
             <span data-i18n="layer_bridge_label">Bridge Layer</span><br><small data-i18n="layer_bridge_small">方法路由 / 数据序列化</small>
           </div>
-          <div class="arch-arrow">↓ Native Call ↓</div>
+          <div class="arch-arrow" data-i18n="arch_arrow_native">↓ Native Call ↓</div>
           <div class="arch-layer layer-native">
             <span class="layer-tech" data-i18n="layer_native_tech">Objective-C / CocoaPods</span>
             <span data-i18n="layer_native_label">Native Layer</span><br><small data-i18n="layer_native_small">macOS API / 文件系统 / 进程管理</small>
@@ -769,47 +202,14 @@
     </div>
   </section>
 
-  <!-- 下载区域 -->
-  <section id="download" class="download">
+  <!-- CTA 区域 -->
+  <section class="cta-section">
     <div class="container">
-      <div class="download-card">
-        <h2 data-i18n="download_title">立即下载 Alight</h2>
-        <p class="download-desc" data-i18n="download_desc">免费使用，让你的 Mac 重获新生</p>
-        <div class="download-info">
-          <div class="info-item">
-            <span class="info-label" data-i18n="info_version">版本</span>
-            <span class="info-value" id="version">
-              <span class="version-loading">获取中...</span>
-            </span>
-          </div>
-          <div class="info-item">
-            <span class="info-label" data-i18n="info_date">发布日期</span>
-            <span class="info-value" id="releaseDate">-</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label" data-i18n="info_size">大小</span>
-            <span class="info-value" data-i18n="info_size_val">~10 MB</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label" data-i18n="info_require">要求</span>
-            <span class="info-value" data-i18n="info_require_val">macOS 12.0+</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label" data-i18n="info_arch">架构</span>
-            <span class="info-value" data-i18n="info_arch_val">Universal (Apple Silicon + Intel)</span>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary btn-xl download-btn" id="downloadBtn" onclick="handleDownload(event)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <!-- 由 JS 动态填充 -->
-        </a>
-        <div class="download-extras">
-          <a href="https://github.com/jackie-jiang-ios/alight/releases" target="_blank" rel="noopener noreferrer" class="link-secondary">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-<span data-i18n="view_releases">查看 GitHub Releases</span>
-          </a>
-        </div>
-        <p class="download-note"><span data-i18n="download_note">⚠️ 首次运行需要在「系统设置 → 隐私与安全性」中允许运行 · 下载即表示同意我们的</span> <a href="terms.html" data-i18n="download_note_terms">服务条款</a> <span data-i18n="download_note_and">和</span> <a href="privacy.html" data-i18n="download_note_privacy">隐私政策</a></p>
+      <div class="cta-card">
+        <h2 data-i18n="cta_title">开始使用 Alight</h2>
+        <p data-i18n="cta_desc">我们的首款产品已经发布，免费下载体验！</p>
+        <a href="alight/#download" class="btn btn-primary btn-xl" data-i18n="cta_btn">立即免费下载 →</a>
+        <p class="cta-note" data-i18n="cta_note">或访问 <a href="alight/">Alight 产品页面</a> 了解更多详情</p>
       </div>
     </div>
   </section>
@@ -827,15 +227,8 @@
         </div>
         <div class="footer-links">
           <h4 data-i18n="footer_product">产品</h4>
-          <a href="#" data-i18n="footer_alight">Alight</a>
+          <a href="alight/" data-i18n="footer_alight">Alight</a>
           <a href="#" data-i18n="footer_more">更多产品敬请期待...</a>
-        </div>
-        <div class="footer-links">
-          <h4 data-i18n="footer_functions">功能</h4>
-          <a href="#features" data-i18n="feat_deep_clean_name">深度清理</a>
-          <a href="#features" data-i18n="feat_app_manage_name">应用管理</a>
-          <a href="#features" data-i18n="feat_startup_name">启动项管理</a>
-          <a href="#features" data-i18n="feat_process_name">进程管理</a>
         </div>
         <div class="footer-links">
           <h4 data-i18n="footer_about">关于</h4>
@@ -843,9 +236,14 @@
           <a href="privacy.html" data-i18n="footer_privacy">隐私政策</a>
           <a href="terms.html" data-i18n="footer_terms">服务条款</a>
         </div>
+        <div class="footer-links">
+          <h4 data-i18n="footer_connect">联系我们</h4>
+          <a href="https://github.com/jackie-jiang-ios" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:contact@liteapps.cn" data-i18n="footer_email">Email</a>
+        </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 LiteApps. All rights reserved.</p>
+        <p data-i18n="footer_copyright">&copy; 2026 LiteApps. All rights reserved.</p>
       </div>
     </div>
   </footer>

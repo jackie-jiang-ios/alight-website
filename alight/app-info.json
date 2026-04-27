@@ -1,18 +1,14 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "buildDate": "2026-04-28",
-  "downloads": {
-    "universal": {
-      "fileName": "Alight-pro.dmg",
-      "fileSizeBytes": 2405760,
-      "fileSizeFormatted": "2.3 MB",
-      "downloadUrl": "https://alight-downloads.oss-cn-hangzhou.aliyuncs.com/staging/Alight-pro.dmg",
-      "githubDownloadUrl": "https://github.com/jackie-jiang-ios/alight-website-staging/releases/download/staging-release/Alight-pro.dmg"
-    }
-  },
-  "githubUrl": "https://github.com/jackie-jiang-ios/alight-website-staging/releases/tag/staging-release",
+  "fileName": "Alight-pro-0.1.1+20260428.0258.dmg",
+  "fileSizeBytes": 2915613,
+  "fileSizeFormatted": "2.8 MB",
+  "downloadUrl": "https://alight-downloads.oss-cn-hangzhou.aliyuncs.com/releases/Alight-pro-0.1.1+20260428.0258.dmg",
+  "githubDownloadUrl": "https://github.com/jackie-jiang-ios/alight-website/releases/download/production-release/Alight-pro-0.1.1+20260428.0258.dmg",
+  "githubUrl": "https://github.com/jackie-jiang-ios/alight-website/releases/tag/production-release",
   "notarize": true,
-  "environment": "staging",
-  "sha": "manual-upload",
-  "updatedAt": "2026-04-28T00:50:00Z"
+  "environment": "production",
+  "sha": "local-build",
+  "updatedAt": "2026-04-28T02:58:00Z"
 }

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Icons Preview - NewFile</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    background: #f5f5f7;
+    padding: 40px;
+    color: #1d1d1f;
+  }
+  h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; color: #1d1d1f; }
+  p.subtitle { color: #86868b; margin-bottom: 32px; font-size: 14px; }
+
+  .preview-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* ====== 左侧: 用户原始截图参考 ====== */
+  .screenshot-panel {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 20px;
+    max-width: 480px;
+  }
+  .screenshot-panel h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #86868b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .screenshot-img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #e8e8ed;
+  }
+
+  /* ====== 右侧: 提取的图标效果 ====== */
+  .icons-panel {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 24px;
+    flex: 1;
+    min-width: 400px;
+  }
+  .icons-panel h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #86868b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+
+  /* macOS 风格列表 (仿 NewFile 设置界面) */
+  .mac-list {
+    border: 1px solid #e8e8ed;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .mac-list-section-title {
+    padding: 10px 16px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #86868b;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    background: #fafafa;
+  }
+  .mac-list-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 16px;
+    gap: 12px;
+    min-height: 44px;
+    border-bottom: 0.5px solid #f0f0f0;
+    transition: background 0.15s;
+  }
+  .mac-list-item:last-child {
+    border-bottom: none;
+  }
+  .mac-list-item:hover {
+    background: #f9f9fb;
+  }
+
+  /* 文件图标容器 */
+  .file-icon-slot {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .file-icon-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+  }
+  .item-name {
+    font-size: 13px;
+    color: #1d1d1f;
+    font-weight: 500;
+  }
+  .item-ext {
+    font-size: 11px;
+    color: #86868b;
+    font-family: 'SF Mono', Monaco, monospace;
+  }
+
+  /* Toggle 开关 */
+  .toggle-switch {
+    width: 44px;
+    height: 26px;
+    background: #e9e9eb;
+    border-radius: 13px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .toggle-switch.on {
+    background: #34c759;
+  }
+  .toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+  }
+  .toggle-switch.on::after {
+    transform: translateX(18px);
+  }
+
+  /* ====== 图标网格展示 ====== */
+  .icon-grid-section {
+    margin-top: 32px;
+  }
+  .icon-grid-section h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #86868b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 16px;
+  }
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .grid-item:hover {
+    background: #f9f9fb;
+  }
+  .grid-item .icon-box {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .grid-item .icon-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .grid-item .label {
+    font-size: 11px;
+    color: #86868b;
+    text-align: center;
+  }
+
+  /* ====== CSS 绘制的 macOS 文件图标 ====== */
+  .macos-file-icon {
+    --icon-size: 100%;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    display: block;
+  }
+
+  /* === 文本类图标 (灰白纸张) === */
+  .icon-txt svg, .icon-rtf svg, .icon-md svg, .icon-log svg {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.08));
+  }
+
+  /* === Word 蓝色 === */
+  .icon-docx svg { filter: drop-shadow(0 1px 3px rgba(43,87,151,0.25)); }
+  /* === Excel 绿色 === */  
+  .icon-xlsx svg { filter: drop-shadow(0 1px 3px rgba(33,115,70,0.25)); }
+  /* === PowerPoint 橙色 === */
+  .icon-pptx svg { filter: drop-shadow(0 1px 3px rgba(210,71,38,0.25)); }
+</style>
+</head>
+<body>
+
+<h1>📄 NewFile 图标效果预览</h1>
+<p class="subtitle">对比用户截图 vs CSS 绘制的 macOS 风格文件图标</p>
+
+<div class="preview-container">
+
+  <!-- 左侧: 参考截图 -->
+  <div class="screenshot-panel">
+    <h2>参考 — NewFile 设置窗口截图</h2>
+    <!-- 这里放置用户的原始截图 -->
+    <div style="text-align:center; padding:20px; color:#999; font-size:13px;">
+      👆 请对照左侧你的实际截图<br><br>
+      <span style="color:#aaa;font-size:12px;">下方为 CSS 还原的图标效果 ↓</span>
+    </div>
+  </div>
+
+  <!-- 右侧: CSS 绘制图标 -->
+  <div class="icons-panel">
+    <h2>CSS 绘制 — macOS 风格文件图标</h2>
+
+    <!-- 模拟 NewFile 设置界面的列表 -->
+    <div class="mac-list">
+
+      <!-- 文本分类 -->
+      <div class="mac-list-section-title">文本</div>
+      
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-txt" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="txtPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#f0f0f0"/></linearGradient>
+              <linearGradient id="txtFold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8e8e8"/><stop offset="100%" stop-color="#ddd"/></linearGradient>
+            </defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#txtPaper)" stroke="#ccc" stroke-width="0.5"/>
+            <path d="M24 2v12h12L24 2z" fill="url(#txtFold)" stroke="#ccc" stroke-width="0.5"/>
+            <rect x="7" y="23" width="26" height="1.8" rx="0.9" fill="#d0d0d0"/>
+            <rect x="7" y="27.5" width="21" height="1.8" rx="0.9" fill="#e0e0e0"/>
+            <rect x="7" y="32" width="24" height="1.8" rx="0.9" fill="#e0e0e0"/>
+            <rect x="7" y="36.5" width="15" height="1.8" rx="0.9" fill="#ebebeb"/>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">文本文档</span>
+          <span class="item-ext">.txt · 文本</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-rtf" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="rtfPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#f0f0f0"/></linearGradient></defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#rtfPaper)" stroke="#ccc" stroke-width="0.5"/>
+            <path d="M24 2v12h12L24 2z" fill="#e8e8e8" stroke="#ccc" stroke-width="0.5"/>
+            <rect x="7" y="23" width="26" height="1.8" rx="0.9" fill="#d0d0d0"/>
+            <rect x="7" y="27.5" width="18" height="1.8" rx="0.9" fill="#e0e0e0"/>
+            <rect x="7" y="32" width="22" height="1.8" rx="0.9" fill="#e0e0e0"/>
+            <rect x="7" y="36.5" width="12" height="1.8" rx="0.9" fill="#ebebeb"/>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">RTF 文档</span>
+          <span class="item-ext">.rtf · 文本</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-md" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="mdPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#f0f0f0"/></linearGradient></defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#mdPaper)" stroke="#ccc" stroke-width="0.5"/>
+            <path d="M24 2v12h12L24 2z" fill="#e8e8e8" stroke="#ccc" stroke-width="0.5"/>
+            <text x="20" y="33" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#888">M</text>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">Markdown 文档</span>
+          <span class="item-ext">.md · 文本</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-csv" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="csvPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#f0f0f0"/></linearGradient>
+              <linearGradient id="csvBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34c759"/><stop offset="100%" stop-color="#28a745"/></linearGradient>
+            </defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#csvPaper)" stroke="#28a745" stroke-width="0.6"/>
+            <path d="M24 2v12h12L24 2z" fill="#d0f0d5" stroke="#28a745" stroke-width="0.6"/>
+            <path d="M0 39a4 4 0 0 0 4 4h32a4 4 0 0 0 4-4v-5H0v5z" fill="url(#csvBand)"/>
+            <text x="20" y="42" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="800" fill="white">S</text>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">CSV 文件</span>
+          <span class="item-ext">.csv · 文本</span>
+        </div>
+        <div class="toggle-switch"></div>
+      </div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-log" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="logPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#f0f0f0"/></linearGradient></defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#logPaper)" stroke="#ccc" stroke-width="0.5"/>
+            <path d="M24 2v12h12L24 2z" fill="#e8e8e8" stroke="#ccc" stroke-width="0.5"/>
+            <text x="20" y="33" text-anchor="middle" font-family="SF Mono, monospace" font-size="9" font-weight="700" fill="#999">LOG</text>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">日志文件</span>
+          <span class="item-ext">.log · 文本</span>
+        </div>
+        <div class="toggle-switch"></div>
+      </div>
+
+      <!-- Office 分类 -->
+      <div class="mac-list-section-title">Office 文档</div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-docx" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="docxPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#f5f5f5"/></linearGradient>
+              <linearGradient id="docxBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2b5797"/><stop offset="100%" stop-color="#1e3f6f"/></linearGradient>
+            </defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#docxPaper)" stroke="#2b5797" stroke-width="0.7"/>
+            <path d="M24 2v12h12L24 2z" fill="#e0e8f5" stroke="#2b5797" stroke-width="0.7"/>
+            <path d="M0 39a4 4 0 0 0 4 4h32a4 4 0 0 0 4-4v-5H0v5z" fill="url(#docxBand)"/>
+            <text x="20" y="42.5" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="15" font-weight="800" fill="white">W</text>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">Word 文档</span>
+          <span class="item-ext">.docx · Office 文档</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-xlsx" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="xlsxPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#f5f5f5"/></linearGradient>
+              <linearGradient id="xlsxBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#217346"/><stop offset="100%" stop-color="#18502f"/></linearGradient>
+            </defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#xlsxPaper)" stroke="#217346" stroke-width="0.7"/>
+            <path d="M24 2v12h12L24 2z" fill="#e0f0e0" stroke="#217346" stroke-width="0.7"/>
+            <path d="M0 39a4 4 0 0 0 4 4h32a4 4 0 0 0 4-4v-5H0v5z" fill="url(#xlsxBand)"/>
+            <text x="20" y="42.5" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="15" font-weight="800" fill="white">S</text>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">Excel 工作簿</span>
+          <span class="item-ext">.xlsx · Office 文档</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-pptx" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="pptxPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#f5f5f5"/></linearGradient>
+              <linearGradient id="pptxBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d24726"/><stop offset="100%" stop-color="#a33a1e"/></linearGradient>
+            </defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#pptxPaper)" stroke="#d24726" stroke-width="0.7"/>
+            <path d="M24 2v12h12L24 2z" fill="#faede5" stroke="#d24726" stroke-width="0.7"/>
+            <path d="M0 39a4 4 0 0 0 4 4h32a4 4 0 0 0 4-4v-5H0v5z" fill="url(#pptxBand)"/>
+            <text x="20" y="42.5" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="15" font-weight="800" fill="white">P</text>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">PowerPoint 演示文稿</span>
+          <span class="item-ext">.pptx · Office 文档</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <!-- iWork 分类 -->
+      <div class="mac-list-section-title">iWork 文档</div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-pages" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="pagesPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fafafa"/><stop offset="100%" stop-color="#eee"/></linearGradient></defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#pagesPaper)" stroke="#bbb" stroke-width="0.5"/>
+            <path d="M24 2v12h12L24 2z" fill="#e8e8e8" stroke="#bbb" stroke-width="0.5"/>
+            <rect x="9" y="19" width="22" height="17" rx="1.5" fill="#fff" stroke="#aaa" stroke-width="0.5"/>
+            <line x1="12" y1="24.5" x2="28" y2="24.5" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="12" y1="28.5" x2="25" y2="28.5" stroke="#ddd" stroke-width="1" stroke-linecap="round"/>
+            <line x1="12" y1="32.5" x2="28" y2="32.5" stroke="#eee" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">Pages 文稿</span>
+          <span class="item-ext">.pages · iWork 文档</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-numbers" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="numbersPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fafafa"/><stop offset="100%" stop-color="#eee"/></linearGradient></defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#numbersPaper)" stroke="#bbb" stroke-width="0.5"/>
+            <path d="M24 2v12h12L24 2z" fill="#e8e8e8" stroke="#bbb" stroke-width="0.5"/>
+            <rect x="8" y="19" width="24" height="18" rx="1.5" fill="#fff" stroke="#aaa" stroke-width="0.5"/>
+            <line x1="8" y1="25" x2="32" y2="25" stroke="#27ae60" stroke-width="1"/>
+            <line x1="8" y1="31" x2="32" y2="31" stroke="#eee" stroke-width="0.8"/>
+            <line x1="16" y1="19" x2="16" y2="37" stroke="#eee" stroke-width="0.8"/>
+            <line x1="24" y1="19" x2="24" y2="37" stroke="#eee" stroke-width="0.8"/>
+            <circle cx="12" cy="22" r="1.5" fill="#27ae60"/>
+            <circle cx="12" cy="28" r="1.5" fill="#e67e22"/>
+            <circle cx="12" cy="34" r="1.5" fill="#3498db"/>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">Numbers 表格</span>
+          <span class="item-ext">.numbers · iWork 文档</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="mac-list-item">
+        <div class="file-icon-slot">
+          <svg class="macos-file-icon icon-keynote" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="keyPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fafafa"/><stop offset="100%" stop-color="#eee"/></linearGradient></defs>
+            <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#keyPaper)" stroke="#bbb" stroke-width="0.5"/>
+            <path d="M24 2v12h12L24 2z" fill="#e8e8e8" stroke="#bbb" stroke-width="0.5"/>
+            <rect x="9" y="19" width="22" height="18" rx="1.5" fill="#fff" stroke="#aaa" stroke-width="0.5"/>
+            <polygon points="20,23 27,35 13,35" fill="#007AFF" opacity="0.85"/>
+            <polygon points="14,28 18,35 10,35" fill="#5ac8fa" opacity="0.65"/>
+            <rect x="17.5" y="31" width="5" height="4" rx="0.5" fill="#ff9500" opacity="0.85"/>
+          </svg>
+        </div>
+        <div class="item-info">
+          <span class="item-name">Keynote 讲演</span>
+          <span class="item-ext">.key · iWork 文档</span>
+        </div>
+        <div class="toggle-switch on"></div>
+      </div>
+
+    </div><!-- /mac-list -->
+
+    <!-- 底部图标网格 -->
+    <div class="icon-grid-section">
+      <h2>全部图标一览</h2>
+      <div class="icon-grid" id="iconGrid">
+        <!-- JS 动态填充更多图标 -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// 更多图标的 SVG 定义
+const moreIcons = [
+  // 设计类
+  { name: 'Photoshop', ext: '.psd', color: '#31c5f0', bg: '#1e1e3a', label: 'Ps' },
+  { name: 'Illustrator', ext: '.ai', color: '#ff9a00', bg: '#3c1e1e', label: 'Ai' },
+  { name: 'Sketch', ext: '.sketch', color: '#f5c400', bg: '#fde94c', label: '✎' },
+  { name: 'SVG', ext: '.svg', color: '#f24e1e', bg: '#fff5f5', label: '⌾' },
+  // Web
+  { name: 'HTML', ext: '.html', color: '#e44d26', bg: '#fff4e6', label: '&lt;' },
+  { name: 'CSS', ext: '.css', color: '#264de4', bg: '#e8f4fd', label: '#'},
+  { name: 'JavaScript', ext: '.js', color: '#323330', bg: '#fffbe6', label: 'JS' },
+  { name: 'TypeScript', ext: '.ts', color: '#3178c6', bg: '#f0f0fc', label: 'TS' },
+  { name: 'Vue', ext: '.vue', color: '#42b883', bg: '#f0fff4', label: '◆' },
+  // 编程
+  { name: 'Swift', ext: '.swift', color: '#f05138', bg: '#fff5f0', label: 'Sw' },
+  { name: 'Python', ext: '.py', color: '#3776ab', bg: '#fff8e8', label: 'Py' },
+  { name: 'Go', ext: '.go', color: '#00add8', bg: '#f0f8ff', label: 'Go' },
+  { name: 'Rust', ext: '.rs', color: '#dea584', bg: '#fff3f0', label: 'Rs' },
+  { name: 'Java', ext: '.java', color: '#5382a1', bg: '#f8f8f8', label: 'Ja' },
+  { name: 'C', ext: '.c', color: '#555', bg: '#f0f5fa', label: 'C' },
+  { name: 'C++', ext: '.cpp', color: '#659AD2', bg: '#f0f5fa', label: 'C+' },
+  { name: 'Shell', ext: '.sh', color: '#4eaa25', bg: '#fff9f0', label: '▸' },
+  // 数据
+  { name: 'JSON', ext: '.json', color: '#cb4a32', bg: '#fff5f5', label: '{}' },
+  { name: 'XML', ext: '.xml', color: '#cc6633', bg: '#fff8f0', label: '<>' },
+  { name: 'YAML', ext: '.yaml', color: '#aa1177', bg: '#f5f0ff', label: 'YML' },
+  { name: 'TOML', ext: '.toml', color: '#9c4221', bg: '#f0f8ff', label: 'TM' },
+  // 配置
+  { name: 'INI', ext: '.ini', color: '#999', bg: '#f8f8f8', label: '☰' },
+  { name: 'Plist', ext: '.plist', color: '#777', bg: '#f8f8f8', label: 'pl' },
+  { name: 'Conf', ext: '.conf', color: '#888', bg: '#f5f5f5', label: '⚙' },
+];
+
+const grid = document.getElementById('iconGrid');
+moreIcons.forEach(icon => {
+  const item = document.createElement('div');
+  item.className = 'grid-item';
+  item.innerHTML = `
+    <div class="icon-box">
+      <svg viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+        <defs><linearGradient id="bg_${icon.ext.slice(1)}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${icon.bg}"/><stop offset="100%" stop-color="${icon.bg}dd"/></linearGradient></defs>
+        <path d="M4 2H24L36 14V46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="url(#bg_${icon.ext.slice(1)})" stroke="${icon.color}" stroke-width="0.6"/>
+        <path d="M24 2v12h12L24 2z" fill="${icon.bg}ee" stroke="${icon.color}" stroke-width="0.6"/>
+        <text x="20" y="32" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="${icon.color}">${icon.label}</text>
+      </svg>
+    </div>
+    <span class="label">${icon.name}<br>${icon.ext}</span>
+  `;
+  grid.appendChild(item);
+});
+</script>
+
+</body>
+</html>

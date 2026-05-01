@@ -5,7 +5,7 @@
   "fileSizeBytes": 2016232,
   "fileSizeFormatted": "2.9 MB",
   "downloadUrl": "https://alight-downloads.oss-cn-hangzhou.aliyuncs.com/releases/NewFile-1.0-20260501.1943.dmg",
-  "githubDownloadUrl": "https://github.com/jackie-jiang-ios/alight-website/releases/download/newfile-production-release/NewFile-1.0-20260501.1943.dmg",
+  "githubDownloadUrl": "https://github.com/jackie-jiang-ios/liteapps/releases/download/newfile-production-release/NewFile-1.0-20260501.1943.dmg",
   "notarize": true,
   "environment": "dev",
   "sha": "local-build",

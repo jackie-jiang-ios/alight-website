@@ -5,7 +5,7 @@
   "fileSizeBytes": 2915613,
   "fileSizeFormatted": "2.8 MB",
   "downloadUrl": "https://alight-downloads.oss-cn-hangzhou.aliyuncs.com/releases/Alight-pro-0.1.1-20260428.0258.dmg",
-  "githubDownloadUrl": "https://github.com/jackie-jiang-ios/alight-website/releases/download/alight-production-release/Alight-pro-0.1.1-20260428.0258.dmg",
+  "githubDownloadUrl": "https://github.com/jackie-jiang-ios/liteapps/releases/download/alight-production-release/Alight-pro-0.1.1-20260428.0258.dmg",
   "notarize": true,
   "environment": "production",
   "sha": "local-build",
